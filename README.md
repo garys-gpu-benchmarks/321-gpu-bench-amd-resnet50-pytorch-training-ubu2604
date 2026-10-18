@@ -17,7 +17,7 @@ Results are written to `results/benchmark.db` and `results/summary.json`.
 
 This workload is executed on the validation host after the repository is copied there. `setup.sh` and `run_benchmark.sh` do not open an outbound SSH session.
 
-Prerequisites: Ubuntu 26.04; AMD; Python 3.14.N (uv-managed; all benchmark venvs; same build as 24.04). System python3.14 retained for OS and setup scripts only; root or sudo for `setup.sh`. Framework: Bash, SQLite, Python, PyYAML, ROCm Runtime, PyTorch-ROCm, torchvision, HIP/ROCm. This is a host benchmark, not a laptop `pip install` project.
+Prerequisites: Ubuntu 26.04; AMD; Python 3.14.8 (uv-managed CPython from `uv python install 3.14`; all benchmark venvs; same build as 24.04). System Python 3.14.4 retained for OS and setup scripts only; root or sudo for `setup.sh`. Framework: Bash, SQLite, Python, PyYAML, ROCm Runtime, PyTorch-ROCm, torchvision, HIP/ROCm. This is a host benchmark, not a laptop `pip install` project.
 
 ```mermaid
 flowchart LR
@@ -32,14 +32,14 @@ This repository is one of the 32 workloads in the AMD Ubuntu 26.04 bundle, [`bun
 apt-get update && apt-get install -y git
 git clone --recurse-submodules https://github.com/garys-gpu-benchmarks/bundle-amd-ubuntu-2604 /opt/benchmarks \
   && cd /opt/benchmarks \
-  && ./run.sh list \
+  && ./run_benchmark_suite.sh --list \
   && cd /opt/benchmarks/321-gpu-bench-amd-resnet50-pytorch-training-ubu2604 \
   && bash run_benchmark.sh --profile smoke --validate \
   && cd /opt/benchmarks \
   && echo "Done: 32 workloads in /opt/benchmarks; 321-gpu-bench-amd-resnet50-pytorch-training-ubu2604 smoke run passed. Next: ./run_benchmark_suite.sh --help"
 ```
 
-Every line in `./run.sh list` should show `ready`. The commands are joined with `&&`, so if the clone or the smoke run fails, the chain stops there, and the closing message appears only when everything succeeded. The chain ends in `/opt/benchmarks`, where the suite runner is. For more extensive testing:
+Every line in `./run_benchmark_suite.sh --list` should show `ready`; it exits with an error if any workload is not fetched. The commands are joined with `&&`, so if the clone, the list or the smoke run fails, the chain stops there, and the closing message appears only when everything succeeded. The chain ends in `/opt/benchmarks`, where the suite runner is. For more extensive testing:
 
 ```bash
 ./run_benchmark_suite.sh -p smoke                 # smoke test of all 32 workloads
@@ -73,8 +73,8 @@ Three operator scripts from [`garys-gpu-benchmarks/gpu-bench-suite`](https://git
 - **`get_remote_info.sh`** (on your laptop; Git Bash on Windows) — over one SSH connection, copies the runtime ledger and every workload's `results/raw`, `results/parsed` and suite logs into `RUNTIME_LEDGERS/` and `DIRECTORIES/`.
   ```bash
   git clone https://github.com/garys-gpu-benchmarks/gpu-bench-suite && cd gpu-bench-suite
-  ./scripts/get_remote_info.sh 203.0.113.10                     # root@host, port 22
-  ./scripts/get_remote_info.sh -i ~/.ssh/id_ed25519 -o ~/results ubuntu@203.0.113.10 2222
+  ./scripts/get_remote_info.sh --host 203.0.113.10              # root@host, port 22
+  ./scripts/get_remote_info.sh --host ubuntu@203.0.113.10 --port 2222 -i ~/.ssh/id_ed25519 -o ~/results
   ```
 - **`show_metrics.sh`** (laptop or GPU host) — prints one workload's runs from the runtime ledger in fixed-width metric columns with per-profile means. On the GPU host it is `/opt/benchmarks/show_metrics.sh`.
   ```bash
@@ -92,7 +92,7 @@ Trains torchvision ResNet-50 in-process on synthetic images (one timed pass, not
 - Validates step_time_ms, images/s, and peak memory from an inline PyTorch trainer. This is not pytest
 - #1: Training batch step time (step_time_ms); is present and physically sensible.
 - #2: Training throughput (images_per_sec); is present and physically sensible.
-- #3: Achieved TFLOPS, model-FLOPs estimate (achieved_TFLOPS); is present and physically sensible.
+- #3: Modeled training throughput, 3x forward FLOPs, TFLOP/s (modeled_tflops); is present and physically sensible.
 - #4: Peak GPU memory usage (peak_gpu_memory_GB); is present and physically sensible.
 - #5: Modeled parameter and input traffic, GB/s (modeled_param_input_traffic_gb_s) is present and physically sensible.
 
@@ -100,7 +100,7 @@ Trains torchvision ResNet-50 in-process on synthetic images (one timed pass, not
 
 - **#1: Training batch step time** — stored as `step_time_ms`.
 - **#2: Training throughput** — stored as `images_per_sec`.
-- **#3: Achieved TFLOPS, model-FLOPs estimate** — stored as `achieved_TFLOPS`.
+- **#3: Modeled training throughput, 3x forward FLOPs, TFLOP/s** — stored as `modeled_tflops`.
 - **#4: Peak GPU memory usage** — stored as `peak_gpu_memory_GB`.
 - **#5: Modeled parameter and input traffic, GB/s** — stored as `modeled_param_input_traffic_gb_s`.
 
@@ -111,7 +111,7 @@ Trains torchvision ResNet-50 in-process on synthetic images (one timed pass, not
 - OS: Ubuntu 26.04
 - GPU vendor: AMD
 - Framework family: Bash, SQLite, Python, PyYAML, ROCm Runtime, PyTorch-ROCm, torchvision, HIP/ROCm
-- Python: Python 3.14.N (uv-managed; all benchmark venvs; same build as 24.04). System python3.14 retained for OS and setup scripts only
+- Python: Python 3.14.8 (uv-managed CPython from `uv python install 3.14`; all benchmark venvs; same build as 24.04). System Python 3.14.4 retained for OS and setup scripts only
 
 ### Reference validation environment
 
@@ -131,7 +131,7 @@ Ubuntu 26.04 / AMD / Bash, SQLite, Python, PyYAML, ROCm Runtime, PyTorch-ROCm, t
 |---|---|
 | OS | Ubuntu 26.04 |
 | Kernel | kernel 7.0.0 |
-| Python | Python 3.14.N (uv-managed; all benchmark venvs; same build as 24.04). System python3.14 retained for OS and setup scripts only |
+| Python | Python 3.14.8 (uv-managed CPython from `uv python install 3.14`; all benchmark venvs; same build as 24.04). System Python 3.14.4 retained for OS and setup scripts only |
 | ROCm | ROCm 10.1.0 |
 | rocBLAS | rocBLAS 5.7.0 |
 
@@ -164,7 +164,7 @@ source ".venv/bin/activate"
 
 CSV with two identical training-sample rows
 
-sample_index,step,loss,images_per_sec,step_time_ms,achieved_TFLOPS,memory_bandwidth_GBps,modeled_param_input_traffic_gb_s,peak_gpu_memory_GB
+sample_index,step,loss,images_per_sec,step_time_ms,modeled_tflops,min_operand_traffic_gb_s,modeled_param_input_traffic_gb_s,peak_gpu_memory_GB
 0,0,1.0,120,16.7,1.2,40,40,2.5
 
 ```bash
@@ -179,7 +179,7 @@ Consolidated metrics from the most recent run — suitable for CI artifact uploa
 
 CSV with two identical training-sample rows
 
-sample_index,step,loss,images_per_sec,step_time_ms,achieved_TFLOPS,memory_bandwidth_GBps,modeled_param_input_traffic_gb_s,peak_gpu_memory_GB
+sample_index,step,loss,images_per_sec,step_time_ms,modeled_tflops,min_operand_traffic_gb_s,modeled_param_input_traffic_gb_s,peak_gpu_memory_GB
 0,0,1.0,120,16.7,1.2,40,40,2.5
 
 ## 9. Baselines / Thresholds

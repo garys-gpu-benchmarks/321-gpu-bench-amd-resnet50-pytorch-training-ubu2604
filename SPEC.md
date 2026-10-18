@@ -26,14 +26,14 @@ Run inline torchvision.models.resnet50 training on synthetic tensors. Does not l
 
 CSV with two identical training-sample rows
 
-sample_index,step,loss,images_per_sec,step_time_ms,achieved_TFLOPS,memory_bandwidth_GBps,modeled_param_input_traffic_gb_s,peak_gpu_memory_GB
+sample_index,step,loss,images_per_sec,step_time_ms,modeled_tflops,min_operand_traffic_gb_s,modeled_param_input_traffic_gb_s,peak_gpu_memory_GB
 0,0,1.0,120,16.7,1.2,40,40,2.5
 
 ## Metrics
 
 - **#1: Training batch step time** — stored as `step_time_ms`.
 - **#2: Training throughput** — stored as `images_per_sec`.
-- **#3: Achieved TFLOPS, model-FLOPs estimate** — stored as `achieved_TFLOPS`.
+- **#3: Modeled training throughput, 3x forward FLOPs, TFLOP/s** — stored as `modeled_tflops`.
 - **#4: Peak GPU memory usage** — stored as `peak_gpu_memory_GB`.
 - **#5: Modeled parameter and input traffic, GB/s** — stored as `modeled_param_input_traffic_gb_s`.
 
@@ -82,7 +82,7 @@ BENCHMARK_DB=tests/fixtures/benchmark.db \
 
 CSV with two identical training-sample rows
 
-sample_index,step,loss,images_per_sec,step_time_ms,achieved_TFLOPS,memory_bandwidth_GBps,modeled_param_input_traffic_gb_s,peak_gpu_memory_GB
+sample_index,step,loss,images_per_sec,step_time_ms,modeled_tflops,min_operand_traffic_gb_s,modeled_param_input_traffic_gb_s,peak_gpu_memory_GB
 0,0,1.0,120,16.7,1.2,40,40,2.5
 
 ```bash

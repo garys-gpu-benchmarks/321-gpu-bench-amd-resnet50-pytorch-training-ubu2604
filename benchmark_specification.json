@@ -37,7 +37,7 @@
   {
     "field_name": "Metrics",
     "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "#1: Training batch step time (step_time_ms); #2: Training throughput (images_per_sec); #3: Achieved TFLOPS, model-FLOPs estimate (achieved_TFLOPS); #4: Peak GPU memory usage (peak_gpu_memory_GB); #5: Modeled parameter and input traffic, GB/s (modeled_param_input_traffic_gb_s)"
+    "value": "#1: Training batch step time (step_time_ms); #2: Training throughput (images_per_sec); #3: Modeled training throughput, 3x forward FLOPs, TFLOP/s (modeled_tflops); #4: Peak GPU memory usage (peak_gpu_memory_GB); #5: Modeled parameter and input traffic, GB/s (modeled_param_input_traffic_gb_s)"
   },
   {
     "field_name": "Command Tools Executed",
@@ -97,7 +97,7 @@
   {
     "field_name": "Raw Output Example",
     "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "sample_index,step,loss,images_per_sec,step_time_ms,achieved_TFLOPS,memory_bandwidth_GBps,modeled_param_input_traffic_gb_s,peak_gpu_memory_GB\n0,0,1.0,120,16.7,1.2,40,40,2.5"
+    "value": "sample_index,step,loss,images_per_sec,step_time_ms,modeled_tflops,min_operand_traffic_gb_s,modeled_param_input_traffic_gb_s,peak_gpu_memory_GB\n0,0,1.0,120,16.7,1.2,40,40,2.5"
   },
   {
     "field_name": "run_benchmark Command Plus Options for Smoke Run",
@@ -117,7 +117,7 @@
   {
     "field_name": "Output Fields / Metrics to Parse",
     "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "step_time_ms, images_per_sec, achieved_TFLOPS, memory_bandwidth_GBps, modeled_param_input_traffic_gb_s, peak_gpu_memory_GB"
+    "value": "step_time_ms, images_per_sec, modeled_tflops, min_operand_traffic_gb_s, modeled_param_input_traffic_gb_s, peak_gpu_memory_GB"
   },
   {
     "field_name": "Success Criteria",
@@ -127,7 +127,7 @@
   {
     "field_name": "Parser and Normalization Notes",
     "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "loss is the constant 1.0. achieved_TFLOPS uses 3 * 2 * 3.8e9 * (image/224)^2 * images/s / 1e12. memory_bandwidth_GBps and modeled_param_input_traffic_gb_s are the same minimum-traffic model, (parameter bytes * 4 + activation bytes * 2) / step time. The two CSV rows are copies"
+    "value": "loss is the constant 1.0. modeled_tflops uses 3 * 2 * 3.8e9 * (image/224)^2 * images/s / 1e12. min_operand_traffic_gb_s and modeled_param_input_traffic_gb_s are the same minimum-traffic model, (parameter bytes * 4 + activation bytes * 2) / step time. The two CSV rows are copies"
   },
   {
     "field_name": "Hardware Config",
@@ -162,7 +162,7 @@
   {
     "field_name": "Python Version",
     "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "Python 3.14.N (uv-managed; all benchmark venvs; same build as 24.04). System python3.14 retained for OS and setup scripts only"
+    "value": "Python 3.14.8 (uv-managed CPython from `uv python install 3.14`; all benchmark venvs; same build as 24.04). System Python 3.14.4 retained for OS and setup scripts only"
   },
   {
     "field_name": "GPU Runtime Version (was ROCm Version)",
@@ -217,7 +217,7 @@
   {
     "field_name": "g++ Version",
     "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "N/A - CMake not used"
+    "value": "N/A - g++ not used"
   },
   {
     "field_name": "Known Runtime Constraints (<=35 Words Each)",
@@ -362,7 +362,7 @@
   {
     "field_name": "Schema Last Updated",
     "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "2026-08-16"
+    "value": "2026-10-17"
   },
   {
     "field_name": "Installation and Execution Summary",
