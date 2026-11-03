@@ -45,7 +45,6 @@ Validation and logging:
   --save-options-file <path>    Write resolved CLI options to PATH
 
 Workload options:
-  --dataset-name <value>            Override dataset_name
   --precision <value>            Override precision
   --image-size <value>            Override image_size
   --batch-size <value>            Override batch_size
@@ -85,7 +84,6 @@ QUIET=0
 LOG_LEVEL_VALUE="INFO"
 OUTPUT_FORMAT=""
 SAVE_OPTIONS_FILE=""
-DATASET_NAME=""
 PRECISION=""
 IMAGE_SIZE=""
 BATCH_SIZE=""
@@ -112,7 +110,6 @@ while [[ $# -gt 0 ]]; do
     --log-level) LOG_LEVEL_VALUE="${2:-}"; shift 2 ;;
     --output-format) OUTPUT_FORMAT="${2:-}"; shift 2 ;;
     --save-options-file) SAVE_OPTIONS_FILE="${2:-}"; shift 2 ;;
-    --dataset-name) DATASET_NAME="${2:-}"; shift 2 ;;
     --precision) PRECISION="${2:-}"; shift 2 ;;
     --image-size) IMAGE_SIZE="${2:-}"; shift 2 ;;
     --batch-size) BATCH_SIZE="${2:-}"; shift 2 ;;
@@ -157,7 +154,6 @@ print("" if raw_value is None else raw_value)
 PY
 }
 
-DATASET_NAME="${DATASET_NAME:-$(yaml_get dataset_name)}"
 PRECISION="${PRECISION:-$(yaml_get precision)}"
 IMAGE_SIZE="${IMAGE_SIZE:-$(yaml_get image_size)}"
 BATCH_SIZE="${BATCH_SIZE:-$(yaml_get batch_size)}"
@@ -169,7 +165,6 @@ OUTPUT_FORMAT="${OUTPUT_FORMAT:-csv}"
 
 BENCHMARK_RUN_COMMAND="bash run_benchmark.sh --${PROFILE}"
 [[ "${VALIDATE}" -eq 1 ]] && BENCHMARK_RUN_COMMAND+=" --validate"
-[[ -n "${DATASET_NAME}" ]] && BENCHMARK_RUN_COMMAND+=" --dataset-name $(printf %q "${DATASET_NAME}")"
 [[ -n "${PRECISION}" ]] && BENCHMARK_RUN_COMMAND+=" --precision $(printf %q "${PRECISION}")"
 [[ -n "${IMAGE_SIZE}" ]] && BENCHMARK_RUN_COMMAND+=" --image-size $(printf %q "${IMAGE_SIZE}")"
 [[ -n "${BATCH_SIZE}" ]] && BENCHMARK_RUN_COMMAND+=" --batch-size $(printf %q "${BATCH_SIZE}")"
@@ -218,7 +213,6 @@ run_collection() {
     collect_args+=(--device-id "${DEVICE_ID:-0}")
   fi
   grep -q -- '--output-format' <<<"${help}" && collect_args+=(--output-format "${OUTPUT_FORMAT}")
-  grep -q -- '--dataset-name' <<<"${help}" && collect_args+=(--dataset-name "${DATASET_NAME}")
   grep -q -- '--precision' <<<"${help}" && collect_args+=(--precision "${PRECISION}")
   grep -q -- '--image-size' <<<"${help}" && collect_args+=(--image-size "${IMAGE_SIZE}")
   grep -q -- '--batch-size' <<<"${help}" && collect_args+=(--batch-size "${BATCH_SIZE}")

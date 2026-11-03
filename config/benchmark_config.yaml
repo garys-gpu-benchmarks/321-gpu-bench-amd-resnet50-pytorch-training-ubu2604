@@ -8,7 +8,6 @@
 # Add thresholds: or baselines: from hardware_profile.mi300x.yaml and Workload Type.
 sweep:
   profile: smoke
-  dataset_name: synthetic
   precision: fp16
   image_size:
     smoke: 64

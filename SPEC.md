@@ -2,13 +2,12 @@
 
 ## Execution Description
 
-Trains torchvision ResNet-50 in-process on synthetic images (one timed pass, not two subprocess trainers). image_size, batch_size, warmup_iters, num_iterations, precision (fp16 default), and learning_rate come from yaml. dataset_name is ignored. achieved_TFLOPS and memory_bandwidth_GBps are hardcoded 1.0. Sweep dimensions: dataset_name, precision, image_size, batch_size, learning_rate, warmup_iters, num_iterations.
+Trains torchvision ResNet-50 in-process on synthetic images (one timed pass, not two subprocess trainers). image_size, batch_size, warmup_iters, num_iterations, precision (fp16 default), and learning_rate come from yaml. dataset_name is ignored. achieved_TFLOPS and memory_bandwidth_GBps are hardcoded 1.0. Sweep dimensions: precision, image_size, batch_size, learning_rate, warmup_iters, num_iterations.
 
 ## Parameters
 
 | Parameter | CLI Flag | Tested Values | Default | Description |
 | --- | --- | --- | --- | --- |
-| dataset_name | `--dataset-name` | smoke=synthetic, baseline=synthetic, extended=synthetic | synthetic | From Parameter list; see Execution Description With Parameters. |
 | precision | `--precision` | smoke=fp16, baseline=fp16, extended=fp16 | fp16 | From Parameter list; see Execution Description With Parameters. |
 | image_size | `--image-size` | smoke=64, baseline=224, extended=224 | 224 | From Parameter list; see Execution Description With Parameters. |
 | batch_size | `--batch-size` | smoke=2, baseline=8, extended=16 | 8 | From Parameter list; see Execution Description With Parameters. |

@@ -102,17 +102,17 @@
   {
     "field_name": "run_benchmark Command Plus Options for Smoke Run",
     "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "bash run_benchmark.sh --smoke --validate --dataset-name synthetic --precision fp16 --image-size 64 --batch-size 2 --learning-rate 0.1 --warmup-iters 1 --num-iterations 3"
+    "value": "bash run_benchmark.sh --smoke --validate --precision fp16 --image-size 64 --batch-size 2 --learning-rate 0.1 --warmup-iters 1 --num-iterations 3"
   },
   {
     "field_name": "run_benchmark Command Plus Options for Baseline Run",
     "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "bash run_benchmark.sh --baseline --validate --dataset-name synthetic --precision fp16 --image-size 224 --batch-size 8 --learning-rate 0.1 --warmup-iters 2 --num-iterations 18000"
+    "value": "bash run_benchmark.sh --baseline --validate --precision fp16 --image-size 224 --batch-size 8 --learning-rate 0.1 --warmup-iters 2 --num-iterations 18000"
   },
   {
     "field_name": "run_benchmark Command Plus Options for Extended Run",
     "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "bash run_benchmark.sh --extended --validate --dataset-name synthetic --precision fp16 --image-size 224 --batch-size 16 --learning-rate 0.1 --warmup-iters 5 --num-iterations 49000"
+    "value": "bash run_benchmark.sh --extended --validate --precision fp16 --image-size 224 --batch-size 16 --learning-rate 0.1 --warmup-iters 5 --num-iterations 49000"
   },
   {
     "field_name": "Output Fields / Metrics to Parse",
@@ -227,37 +227,37 @@
   {
     "field_name": "Parameter_01",
     "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "dataset_name"
+    "value": "precision"
   },
   {
     "field_name": "Parameter_02",
     "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "precision"
+    "value": "image_size"
   },
   {
     "field_name": "Parameter_03",
     "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "image_size"
+    "value": "batch_size"
   },
   {
     "field_name": "Parameter_04",
     "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "batch_size"
+    "value": "learning_rate"
   },
   {
     "field_name": "Parameter_05",
     "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "learning_rate"
+    "value": "warmup_iters"
   },
   {
     "field_name": "Parameter_06",
     "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "warmup_iters"
+    "value": "num_iterations"
   },
   {
     "field_name": "Parameter_07",
     "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "num_iterations"
+    "value": "-"
   },
   {
     "field_name": "Parameter_08",
@@ -407,7 +407,7 @@
   {
     "field_name": "Profile Parameter Values",
     "source_file": "BenchmarkSpecDefinitions.xlsx::Parameters_SmokeBaselineExtend",
-    "value": "{\"dataset_name\": {\"smoke\": \"synthetic\", \"baseline\": \"synthetic\", \"extended\": \"synthetic\", \"notes\": \"\"}, \"precision\": {\"smoke\": \"fp16\", \"baseline\": \"fp16\", \"extended\": \"fp16\", \"notes\": \"\"}, \"image_size\": {\"smoke\": \"64\", \"baseline\": \"224\", \"extended\": \"224\", \"notes\": \"\"}, \"batch_size\": {\"smoke\": \"2\", \"baseline\": \"8\", \"extended\": \"16\", \"notes\": \"\"}, \"learning_rate\": {\"smoke\": \"0.1\", \"baseline\": \"0.1\", \"extended\": \"0.1\", \"notes\": \"\"}, \"warmup_iters\": {\"smoke\": \"1\", \"baseline\": \"2\", \"extended\": \"5\", \"notes\": \"\"}, \"num_iterations\": {\"smoke\": \"3\", \"baseline\": \"18000\", \"extended\": \"49000\", \"notes\": \"VM 2026-08-16 num_iterations=13200 -> 212s (3:32). Extended 37400 ~10:00, not tested.\"}}"
+    "value": "{\"precision\": {\"smoke\": \"fp16\", \"baseline\": \"fp16\", \"extended\": \"fp16\", \"notes\": \"\"}, \"image_size\": {\"smoke\": \"64\", \"baseline\": \"224\", \"extended\": \"224\", \"notes\": \"\"}, \"batch_size\": {\"smoke\": \"2\", \"baseline\": \"8\", \"extended\": \"16\", \"notes\": \"\"}, \"learning_rate\": {\"smoke\": \"0.1\", \"baseline\": \"0.1\", \"extended\": \"0.1\", \"notes\": \"\"}, \"warmup_iters\": {\"smoke\": \"1\", \"baseline\": \"2\", \"extended\": \"5\", \"notes\": \"\"}, \"num_iterations\": {\"smoke\": \"3\", \"baseline\": \"18000\", \"extended\": \"49000\", \"notes\": \"VM 2026-08-16 num_iterations=13200 -> 212s (3:32). Extended 37400 ~10:00, not tested.\"}}"
   },
   {
     "field_name": "Profile Command Authorship",
