@@ -21,7 +21,7 @@ Run an in-process PyTorch ResNet-50 FP16 trainer (torchvision.models.resnet50) o
 Measure mixed-precision ResNet-50 training-step efficiency
 
 ## Validation Objective
-Validates step_time_ms, images/s, and peak memory from an inline PyTorch trainer. This is not pytest
+Validates ResNet-50 step_time_ms, images/s, and peak memory from an inline PyTorch trainer
 
 ## Workload Category
 Training, Inference, Model Workloads

@@ -18,7 +18,7 @@ Trains torchvision ResNet-50 in-process on synthetic images (one timed pass, not
 ## Invocation
 
 ```bash
-Run inline torchvision.models.resnet50 training on synthetic tensors. Does not launch a separate train_resnet50.py twice
+Run inline torchvision ResNet-50 training on synthetic tensors
 ```
 
 ## Raw Output Format
@@ -47,7 +47,7 @@ Run an in-process PyTorch ResNet-50 FP16 trainer (torchvision.models.resnet50) o
 ## Platform Portability
 
 - **AMD (primary):** ```bash
-Run inline torchvision.models.resnet50 training on synthetic tensors. Does not launch a separate train_resnet50.py twice
+Run inline torchvision ResNet-50 training on synthetic tensors
 ```
 - **NVIDIA:** Primary target is AMD ROCm. NVIDIA notes in this section are reference only and are not the execution path.
 
