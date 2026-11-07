@@ -31,10 +31,19 @@ Profiles (default: --smoke):
 Parameters (override the profile's value):
   --precision <value>           Arithmetic or compute precision (smoke/baseline/extended: fp16)
   --image-size <value>          Spatial image dimensions (smoke 64, baseline 224, extended 224)
-  --batch-size <n>              Number of items processed together (smoke 2, baseline 8, extended 16)
+  --batch-size <n>              Number of items processed together
+                                  smoke:    2
+                                  baseline: 8
+                                  extended: 16
   --learning-rate <n>           Optimizer step size (smoke/baseline/extended: 0.1)
-  --warmup-iters <n>            Untimed warm-up repetitions before measurement (smoke 1, baseline 2, extended 5)
-  --num-iterations <n>          Number of timed repetitions (smoke 3, baseline 18000, extended 49000)
+  --warmup-iters <n>            Untimed warm-up repetitions before measurement
+                                  smoke:    1
+                                  baseline: 2
+                                  extended: 5
+  --num-iterations <n>          Number of timed repetitions
+                                  smoke:    3
+                                  baseline: 18000
+                                  extended: 49000
 
 General options:
   --config <file>               Config file (default: config/benchmark_config.yaml)
