@@ -205,14 +205,14 @@
     "value": "MI300X"
   },
   {
-    "field_name": "Raw Output Format",
-    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "CSV with two identical training-sample rows"
-  },
-  {
     "field_name": "Primary Record Granularity",
     "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
     "value": "one timed training step, written twice"
+  },
+  {
+    "field_name": "Raw Output Format",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "CSV with two identical training-sample rows"
   },
   {
     "field_name": "Raw Output Example",
@@ -225,14 +225,14 @@
     "value": "step_time_ms, images_per_sec, modeled_tflops, min_operand_traffic_gb_s, modeled_param_input_traffic_gb_s, peak_gpu_memory_GB"
   },
   {
-    "field_name": "Success Criteria",
-    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "The timed training loop finishes and images_per_sec and step_time_ms are finite and positive"
-  },
-  {
     "field_name": "Parser and Normalization Notes",
     "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
     "value": "loss is the constant 1.0. modeled_tflops uses 3 * 2 * 3.8e9 * (image/224)^2 * images/s / 1e12. min_operand_traffic_gb_s and modeled_param_input_traffic_gb_s are the same minimum-traffic model, (parameter bytes * 4 + activation bytes * 2) / step time. The two CSV rows are copies"
+  },
+  {
+    "field_name": "Success Criteria",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "The timed training loop finishes and images_per_sec and step_time_ms are finite and positive"
   },
   {
     "field_name": "Hardware Config",

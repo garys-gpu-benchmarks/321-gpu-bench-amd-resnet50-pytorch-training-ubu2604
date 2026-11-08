@@ -19,9 +19,9 @@ usage() {
 
 Usage: bash run_benchmark.sh [OPTIONS]
 
-Workload Name:          ResNet-50 FP16 Training Step (PyTorch).
-Main Goal:              Measure mixed-precision ResNet-50 training-step efficiency.
-Command Tools Executed: Run inline torchvision ResNet-50 training on synthetic tensors.
+Workload Name:          ResNet-50 FP16 Training Step (PyTorch)
+Main Goal:              Measure mixed-precision ResNet-50 training-step efficiency
+Command Tools Executed: Run inline torchvision ResNet-50 training on synthetic tensors
 
 Profiles (default: --smoke):
   --smoke                       Run smoke profile
