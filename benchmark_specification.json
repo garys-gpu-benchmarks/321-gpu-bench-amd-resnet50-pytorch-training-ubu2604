@@ -40,6 +40,11 @@
     "value": "Run inline torchvision ResNet-50 training on synthetic tensors"
   },
   {
+    "field_name": "Execution Description With Parameters",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "Trains torchvision ResNet-50 in-process on synthetic images (one timed pass, not two subprocess trainers). image_size, batch_size, warmup_iters, num_iterations, precision (fp16 default), and learning_rate come from yaml. dataset_name is ignored. achieved_TFLOPS and memory_bandwidth_GBps are hardcoded 1.0. output_format: csv"
+  },
+  {
     "field_name": "Metrics",
     "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
     "value": "#1: Training batch step time (step_time_ms); #2: Training throughput (images_per_sec); #3: Modeled training throughput, 3x forward FLOPs, TFLOP/s (modeled_tflops); #4: Peak GPU memory usage (peak_gpu_memory_GB); #5: Modeled parameter and input traffic, GB/s (modeled_param_input_traffic_gb_s)"
@@ -173,11 +178,6 @@
     "field_name": "Command Methodology",
     "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
     "value": "Train torchvision ResNet-50 in one inline FP16 pass on synthetic images for yaml image_size, batch_size, and num_iterations, then write step time, images per second, and peak memory. This is not two subprocess trainers"
-  },
-  {
-    "field_name": "Execution Description With Parameters",
-    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "Trains torchvision ResNet-50 in-process on synthetic images (one timed pass, not two subprocess trainers). image_size, batch_size, warmup_iters, num_iterations, precision (fp16 default), and learning_rate come from yaml. dataset_name is ignored. achieved_TFLOPS and memory_bandwidth_GBps are hardcoded 1.0. output_format: csv"
   },
   {
     "field_name": "Execution Domain",
