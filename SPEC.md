@@ -2,7 +2,7 @@
 
 ## Execution Description
 
-Trains torchvision ResNet-50 in-process on synthetic images (one timed pass, not two subprocess trainers). image_size, batch_size, warmup_iters, num_iterations, precision (fp16 default), and learning_rate come from yaml. dataset_name is ignored. achieved_TFLOPS and memory_bandwidth_GBps are hardcoded 1.0. Sweep dimensions: precision, image_size, batch_size, learning_rate, warmup_iters, num_iterations.
+Trains torchvision ResNet-50 in-process on synthetic images (one timed pass, not two subprocess trainers). image_size, batch_size, warmup_iters, num_iterations, precision (fp16 default), and learning_rate come from yaml. dataset_name is ignored. counted_tflops is one training step's FLOPs, counted by FlopCounterMode, over the timed step time. Sweep dimensions: precision, image_size, batch_size, learning_rate, warmup_iters, num_iterations.
 
 ## Parameters
 
@@ -25,15 +25,15 @@ Run inline torchvision ResNet-50 training on synthetic tensors
 
 CSV with two identical training-sample rows
 
-sample_index,step,loss,images_per_sec,step_time_ms,modeled_tflops,min_operand_traffic_gb_s,modeled_param_input_traffic_gb_s,peak_gpu_memory_GB
+sample_index,step,loss,images_per_sec,step_time_ms,counted_tflops,min_operand_traffic_gb_s,modeled_param_input_traffic_gb_s,peak_gpu_memory_GB
 0,0,1.0,120,16.7,1.2,40,40,2.5
 
 ## Metrics
 
 - **#1: Training batch step time** — stored as `step_time_ms`.
 - **#2: Training throughput** — stored as `images_per_sec`.
-- **#3: Modeled training throughput, 3x forward FLOPs, TFLOP/s** — stored as `modeled_tflops`.
-- **#4: Peak GPU memory usage** — stored as `peak_gpu_memory_GB`.
+- **#3: Training throughput from counted FLOPs, TFLOP/s** — stored as `counted_tflops`.
+- **#4: Peak PyTorch-allocated GPU memory** — stored as `peak_gpu_memory_GB`.
 - **#5: Modeled parameter and input traffic, GB/s** — stored as `modeled_param_input_traffic_gb_s`.
 
 ## Framework
@@ -81,7 +81,7 @@ BENCHMARK_DB=tests/fixtures/benchmark.db \
 
 CSV with two identical training-sample rows
 
-sample_index,step,loss,images_per_sec,step_time_ms,modeled_tflops,min_operand_traffic_gb_s,modeled_param_input_traffic_gb_s,peak_gpu_memory_GB
+sample_index,step,loss,images_per_sec,step_time_ms,counted_tflops,min_operand_traffic_gb_s,modeled_param_input_traffic_gb_s,peak_gpu_memory_GB
 0,0,1.0,120,16.7,1.2,40,40,2.5
 
 ```bash
